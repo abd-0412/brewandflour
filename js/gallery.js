@@ -120,9 +120,11 @@ let activeCategory = "all";
 let currentLightboxIndex = 0;
 let queriedList = GALLERY_IMAGES;
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initGallery);
+} else {
   initGallery();
-});
+}
 
 function initGallery() {
   const galleryGrid = document.getElementById('gallery-grid');

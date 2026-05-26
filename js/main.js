@@ -3,13 +3,19 @@
   Part of Safr Labs Portfolio piece
 */
 
-document.addEventListener('DOMContentLoaded', () => {
+const initApp = () => {
   initSplash();
   initHeader();
   initMobileMenu();
   initScrollTop();
   initAOS();
-});
+};
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
 
 // 1. Loading Splash Screen Behavior
 function initSplash() {

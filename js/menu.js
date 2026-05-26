@@ -739,9 +739,11 @@ function getCategoryImage(item) {
 // Global active wishlist state
 let wishlist = JSON.parse(localStorage.getItem('brew_wishlist')) || [];
 
-document.addEventListener('DOMContentLoaded', () => {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initMenu);
+} else {
   initMenu();
-});
+}
 
 function initMenu() {
   const menuGridElement = document.getElementById('menu-grid');
