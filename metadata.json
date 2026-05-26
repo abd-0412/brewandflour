@@ -1,0 +1,6 @@
+{
+  "name": "Brew & Flour",
+  "description": "Premium specialty coffee & fresh pastry café in Coimbatore, Tamil Nadu.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
