@@ -538,6 +538,11 @@ header.scrolled .logo-txt {
   padding-left: 8px;
 }
 
+.location-action-btns {
+  display: flex;
+  gap: 12px;
+}
+
 /* Main Content Area spacing index pages */
 main {
   flex: 1;
@@ -1328,5 +1333,15 @@ img {
   .contact-form input, .contact-form select, .contact-form textarea { font-size: 14px; }
   .thematic-quote-block p { font-size: 24px !important; }
   .menu-controls { flex-direction: column; align-items: flex-start; }
+  
+  .location-action-btns {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .location-action-btns .btn {
+    width: 100%;
+    min-width: 0;
+    justify-content: center;
+  }
 }
 
