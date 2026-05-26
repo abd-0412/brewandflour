@@ -21,20 +21,25 @@ if (document.readyState === 'loading') {
 function initSplash() {
   const splash = document.getElementById('loading-splash');
   if (!splash) return;
-  
+
   // Under prefers-reduced-motion, hide splash instantly
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) {
-    splash.style.display = 'none';
+    if (typeof window.__hideSplash === 'function') window.__hideSplash();
+    else splash.style.display = 'none';
     return;
   }
 
-  // Otherwise, run splash presentation for 1.5 seconds
+  // Hide after 1.5s (coordinated with the inline safety-net in <head>)
+  // window.__hideSplash is idempotent — whichever fires first wins.
   setTimeout(() => {
-    splash.style.opacity = '0';
-    setTimeout(() => {
-      splash.style.display = 'none';
-    }, 500);
+    if (typeof window.__hideSplash === 'function') {
+      window.__hideSplash();
+    } else {
+      // Fallback if inline script somehow missed
+      splash.style.opacity = '0';
+      setTimeout(() => { splash.style.display = 'none'; }, 500);
+    }
   }, 1500);
 }
 
@@ -159,7 +164,7 @@ function initScrollTop() {
 }
 
 // 5. AOS v2.3.1 Initialization
-function initAOS() {
+function initAOS(retries = 0) {
   // Ensure AOS is loaded from the CDN before trying to execute
   if (typeof AOS !== 'undefined') {
     AOS.init({
@@ -168,10 +173,11 @@ function initAOS() {
       once: true,
       easing: 'ease-out-cubic'
     });
-  } else {
-    // Retry in 200ms in case CDN was slow to complete loading
-    setTimeout(initAOS, 200);
+  } else if (retries < 10) {
+    // Retry up to 10 times (×200ms = 2s max) in case CDN is slow
+    setTimeout(() => initAOS(retries + 1), 200);
   }
+  // If AOS never loads after 2s, silently skip — page still works without it
 }
 
 

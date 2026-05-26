@@ -82,6 +82,32 @@
     <style>#loading-splash { display: none !important; }</style>
   </noscript>
   <link rel="icon" type="image/png" href="./assets/icon.png">
+
+  <!-- CRITICAL: Hard-timeout safety net for splash screen.
+       Runs synchronously before any external scripts, guaranteeing the splash
+       disappears after 4s even if CDN scripts fail to load on Vercel. -->
+  <script>
+    (function() {
+      var SPLASH_MAX_MS = 4000;
+      var splashDone = false;
+      function hideSplash() {
+        if (splashDone) return;
+        splashDone = true;
+        var el = document.getElementById('loading-splash');
+        if (el) {
+          el.style.transition = 'opacity 0.4s ease-out';
+          el.style.opacity = '0';
+          setTimeout(function() { el.style.display = 'none'; }, 420);
+        }
+      }
+      // Primary: hide on window load (all resources done)
+      window.addEventListener('load', function() { setTimeout(hideSplash, 100); });
+      // Safety net: force-hide after max timeout no matter what
+      setTimeout(hideSplash, SPLASH_MAX_MS);
+      // Expose globally so main.js can call it early (at 1.5s as intended)
+      window.__hideSplash = hideSplash;
+    })();
+  </script>
 </head>
 <body>
 
