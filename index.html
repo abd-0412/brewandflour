@@ -182,14 +182,14 @@
     <section class="hero-section">
       <!-- Floating decorative elements -->
       <!-- Coffee bean 1 -->
-      <div class="hero-decorative-bean-1" aria-hidden="true" style="position: absolute; top: 10%; left: 5%; opacity: 0.5; animation: rotate-bean-1 8s infinite ease-in-out;">
+      <div class="hero-decorative-bean-1" aria-hidden="true" style="position: absolute; top: 10%; left: 5%; opacity: 0.5; animation: rotate-bean-1 8s infinite ease-in-out; pointer-events: none;">
         <svg width="40" height="26" viewBox="0 0 60 40" fill="none">
           <ellipse cx="30" cy="20" rx="30" ry="20" fill="#3D2723" opacity="0.6"/>
           <path d="M2.5 20 Q30 5 57.5 20 Q30 35 2.5 20" stroke="#F5E6D3" stroke-width="2.5"/>
         </svg>
       </div>
       <!-- Coffee bean 2 -->
-      <div class="hero-decorative-bean-2" aria-hidden="true" style="position: absolute; bottom: 10%; left: 45%; opacity: 0.4; animation: rotate-bean-2 10s infinite ease-in-out; animation-delay: 1.5s;">
+      <div class="hero-decorative-bean-2" aria-hidden="true" style="position: absolute; bottom: 10%; left: 45%; opacity: 0.4; animation: rotate-bean-2 10s infinite ease-in-out; animation-delay: 1.5s; pointer-events: none;">
         <svg width="35" height="23" viewBox="0 0 45 30" fill="none">
           <ellipse cx="22.5" cy="15" rx="22.5" ry="15" fill="#6F4E37" opacity="0.5"/>
           <path d="M2 15 Q22.5 4 43 15 Q22.5 26 2 15" stroke="#FDF8F0" stroke-width="1.5"/>
@@ -751,6 +751,6 @@
 
   <!-- Core scripts and scroll tools -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
-  <script src="./js/main.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 </html>

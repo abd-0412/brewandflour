@@ -939,6 +939,11 @@ img {
   100% { transform: translateY(0px) rotate(0deg); }
 }
 
+/* Hero decorative elements must never intercept pointer events */
+[class*="hero-decorative"] {
+  pointer-events: none;
+}
+
 /* Hero Section Base Overrides */
 .hero-section {
   background: radial-gradient(circle at 30% 50%, rgba(26, 12, 9, 0.98) 0%, rgba(13, 6, 5, 0.96) 60%, rgba(10, 5, 4, 0.98) 100%) !important;
@@ -974,7 +979,7 @@ img {
 /* Left content adjustments */
 .hero-content-left {
   position: relative;
-  z-index: 10;
+  z-index: 10; /* Must be above collage cards (z-index 2–4) on all layouts */
 }
 
 /* Right collage wrap */
@@ -985,6 +990,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden; /* Prevent absolute collage cards from bleeding outside and blocking buttons */
 }
 
 /* Individual collage card styling mimicking high-fashion physical booklets */
